@@ -35,6 +35,11 @@ public class HelloController {
         return hello;
     }
 
+    @GetMapping("/")
+    public String home() {
+        return "Home";
+    }
+
     static class Hello {
         private String name;
 
