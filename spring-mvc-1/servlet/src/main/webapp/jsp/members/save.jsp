@@ -1,5 +1,5 @@
-<%@ page import="hello.domain.member.Member" %>
-<%@ page import="hello.domain.member.MemberRepository" %><%--
+<%@ page import="hello.servlet.domain.member.Member" %>
+<%@ page import="hello.servlet.domain.member.MemberRepository" %><%--
   Created by IntelliJ IDEA.
   User: uknow
   Date: 2023/04/16
@@ -26,7 +26,8 @@
 성공
 <ul>
     <li>id=<%=member.getId()%></li>
-
+    <li>username = <%=member.getUsername()%></li>
+    <li>ag=<%=member.getAge()%></li>
 </ul>
 </body>
 </html>
