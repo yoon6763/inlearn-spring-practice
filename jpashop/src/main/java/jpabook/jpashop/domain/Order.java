@@ -1,17 +1,21 @@
 package jpabook.jpashop.domain;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Entity
 @Getter
 @Setter
 @Table(name = "orders")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Order {
 
     @Id
@@ -56,9 +60,8 @@ public class Order {
         Order order = new Order(); // 주문 생성
         order.setMember(member); // 주문 회원 설정
         order.setDelivery(delivery); // 배송 정보 설정
-        for (OrderItem orderItem : orderItems) { // 주문 상품 설정
-            order.addOrderItem(orderItem);
-        }
+        // 주문 상품 설정
+        Arrays.stream(orderItems).forEach(order::addOrderItem);
         order.setStatus(OrderStatus.ORDER); // 주문 상태 설정
         order.setOrderDate(LocalDateTime.now()); // 주문 날짜 설정
         return order;
@@ -67,14 +70,10 @@ public class Order {
     //==비즈니스 로직==//
     // 주문 취소
     public void cancel() {
-        if (delivery.getStatus() == DeliveryStatus.COMP) {
-            throw new IllegalStateException("이미 배송이 완료된 상품은 취소가 불가능합니다.");
-        }
+        if (delivery.getStatus() == DeliveryStatus.COMP) throw new IllegalStateException("이미 배송이 완료된 상품은 취소가 불가능합니다.");
 
         this.setStatus(OrderStatus.CANCEL); // 주문 상태를 취소로 변경
-        for (OrderItem orderItem : this.orderItems) {
-            orderItem.cancel();
-        }
+        this.orderItems.forEach(OrderItem::cancel);
     }
 
     //==조회 로직==//
