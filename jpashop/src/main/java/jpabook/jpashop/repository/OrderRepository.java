@@ -1,7 +1,6 @@
 package jpabook.jpashop.repository;
 
 import jpabook.jpashop.domain.Order;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
@@ -29,8 +28,7 @@ public class OrderRepository {
     }
 
     public List<Order> findAll() {
-        return em.createQuery("select o from Order o", Order.class)
-                .getResultList();
+        return em.createQuery("select o from Order o", Order.class).getResultList();
     }
 
     public List<Order> findAllByString(OrderSearch orderSearch) {
@@ -60,8 +58,7 @@ public class OrderRepository {
             jpql += " m.name like :name";
         }
 
-        TypedQuery<Order> query = em.createQuery(jpql, Order.class)
-                .setMaxResults(1000);
+        TypedQuery<Order> query = em.createQuery(jpql, Order.class).setMaxResults(1000);
 
         if (orderSearch.getOrderStatus() != null) {
             query = query.setParameter("status", orderSearch.getOrderStatus());
@@ -91,8 +88,7 @@ public class OrderRepository {
         }
         //회원 이름 검색
         if (StringUtils.hasText(orderSearch.getMemberName())) {
-            Predicate name =
-                    cb.like(m.<String>get("name"), "%" + orderSearch.getMemberName() + "%");
+            Predicate name = cb.like(m.<String>get("name"), "%" + orderSearch.getMemberName() + "%");
             criteria.add(name);
         }
 
@@ -102,30 +98,23 @@ public class OrderRepository {
     }
 
     public List<Order> findAllWithMemberDelivery() {
-        return em.createQuery(
-                        "select o from Order o" +
-                                " join fetch o.member m" +
-                                " join fetch o.delivery d", Order.class)
-                .getResultList();
+        return em.createQuery("select o from Order o" + " " +
+                "join fetch o.member m" +
+                " join fetch o.delivery d", Order.class).getResultList();
     }
 
     public List<Order> findAllWithItem() {
-        return em.createQuery(
-                        "select distinct o from Order o" +
-                                " join fetch o.member m" +
-                                " join fetch o.delivery d" +
-                                " join fetch o.orderItems oi" +
-                                " join fetch oi.item i", Order.class)
-                .getResultList();
+        return em.createQuery("select distinct o from Order o" + " join fetch o.member m" + " join fetch o.delivery d" + " join fetch o.orderItems oi" + " join fetch oi.item i", Order.class).getResultList();
     }
 
     public List<Order> findAllWithMemberDelivery(int offset, int limit) {
-        return em.createQuery(
-                        "select o from Order o" +
-                                " join fetch o.member m" +
-                                " join fetch o.delivery d", Order.class)
-                .setFirstResult(offset)
-                .setMaxResults(limit)
-                .getResultList();
+        return em.createQuery("select o from Order o" + " join fetch o.member m" + " join fetch o.delivery d", Order.class).setFirstResult(offset).setMaxResults(limit).getResultList();
+    }
+
+    public List<OrderSimpleQueryDto> findOrderDtos() {
+        em.createQuery("select new jpabook.jpashop.repository.OrderSimpleQueryDto(o)" +
+                " from Order o" +
+                " join o.member m" +
+                " join o.delivery d", OrderSimpleQueryDto.class).getResultList();
     }
 }
