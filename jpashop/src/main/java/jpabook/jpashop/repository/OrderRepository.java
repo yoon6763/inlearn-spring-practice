@@ -98,8 +98,8 @@ public class OrderRepository {
     }
 
     public List<Order> findAllWithMemberDelivery() {
-        return em.createQuery("select o from Order o" + " " +
-                "join fetch o.member m" +
+        return em.createQuery("select o from Order o" +
+                " join fetch o.member m" +
                 " join fetch o.delivery d", Order.class).getResultList();
     }
 
@@ -118,7 +118,7 @@ public class OrderRepository {
     }
 
     public List<OrderSimpleQueryDto> findOrderDtos() {
-        em.createQuery("select new jpabook.jpashop.repository.OrderSimpleQueryDto(o)" +
+        return em.createQuery("select new jpabook.jpashop.repository.OrderSimpleQueryDto(o)" +
                 " from Order o" +
                 " join o.member m" +
                 " join o.delivery d", OrderSimpleQueryDto.class).getResultList();
