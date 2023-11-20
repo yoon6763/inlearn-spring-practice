@@ -60,7 +60,6 @@ public class OrderQueryRepository {
      * 최적화
      * Query: 루트 1번, 컬렉션 1번
      * 데이터를 한꺼번에 처리할 때 많이 사용하는 방식
-     *
      */
     public List<OrderQueryDto> findAllByDto_optimization() {
 
@@ -95,4 +94,15 @@ public class OrderQueryRepository {
                 .collect(Collectors.groupingBy(OrderItemQueryDto::getOrderId));
     }
 
+    public List<OrderFlatDto> findAllByDto_flat() {
+        return em.createQuery(
+                        "select new " +
+                                " jpabook.jpashop.repository.order.query.OrderFlatDto(o.id, m.name, o.orderDate, o.status, d.address, i.name, oi.orderPrice, oi.count)" +
+                                " from Order o " +
+                                " join o.member m " +
+                                " join o.delivery d " +
+                                " join o.orderItems oi " +
+                                " join oi.item i", OrderFlatDto.class)
+                .getResultList();
+    }
 }
