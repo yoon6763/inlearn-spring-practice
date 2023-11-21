@@ -1,7 +1,9 @@
 package study.datajpa.entity;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -14,9 +16,10 @@ import static org.junit.jupiter.api.Assertions.*;
 class MemberTest {
 
     @PersistenceContext
-    EntityManager em;
+    private EntityManager em;
 
     @Test
+    @Transactional
     public void testEntity() {
         Team teamA = new Team("teamA");
         Team teamB = new Team("teamB");
