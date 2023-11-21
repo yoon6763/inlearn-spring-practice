@@ -1,6 +1,7 @@
 package study.datajpa.repository;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import study.datajpa.entity.Team;
 
 import javax.persistence.EntityManager;
