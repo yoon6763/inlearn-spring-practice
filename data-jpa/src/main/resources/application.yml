@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:h2:tcp://localhost:8082/~/test
+    url: jdbc:h2:tcp://localhost/~/datajpa
     username: sa
-    password:
+    password: 1234
     driver-class-name: org.h2.Driver
 
   jpa:
