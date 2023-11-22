@@ -219,8 +219,7 @@ class MemberRepositoryTest {
         //when
         Member member = new Member("AAA");
 
-        ExampleMatcher matcher = ExampleMatcher.matching()
-                .withIgnorePaths("age");
+        ExampleMatcher matcher = ExampleMatcher.matching().withIgnorePaths("age");
 
         Example<Member> example = Example.of(member, matcher);
 
@@ -252,6 +251,26 @@ class MemberRepositoryTest {
         for (UsernameOnly usernameOnly : result) {
             System.out.println("usernameOnly = " + usernameOnly);
         }
+    }
+
+    @Test
+    void nativeQuery() {
+        //given
+        Team teamA = new Team("teamA");
+        em.persist(teamA);
+
+        Member m1 = new Member("AAA", 10, teamA);
+        Member m2 = new Member("AAA", 20, teamA);
+        em.persist(m1);
+
+        em.flush();
+        em.clear();
+
+        //when
+        Member result = memberRepository.findByNativeQuery("AAA");
+
+        //then
+        System.out.println("result = " + result);
     }
 
 }
