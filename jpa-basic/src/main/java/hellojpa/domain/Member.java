@@ -1,9 +1,8 @@
-package hellojpa;
+package hellojpa.domain;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Entity
 public class Member {
@@ -13,6 +12,10 @@ public class Member {
 
     @Column(name = "name", nullable = false)
     private String username;
+
+    @ManyToOne
+    @JoinColumn(name = "TEAM_ID")
+    private Team team;
 
     private Integer age;
 
