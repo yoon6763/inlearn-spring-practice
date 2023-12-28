@@ -3,7 +3,7 @@ package hellojpa.domain;
 import javax.persistence.*;
 
 @Entity
-public class Team {
+public class Team extends BaseEntity {
 
     @Id
     @GeneratedValue
