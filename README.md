@@ -32,7 +32,7 @@
 <br>
 <br>
 
-### 스프링 핵심 원리 - 고급현
+### 스프링 핵심 원리 - 고급편
 ![image](https://github.com/yoon6763/inflearn-spring-practice/assets/74063259/1d23d756-a34c-4578-8b7f-21c5c7a7c394)
 
 * advanced
