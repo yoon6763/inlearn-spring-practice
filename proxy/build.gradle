@@ -28,6 +28,9 @@ dependencies {
 	testCompileOnly 'org.projectlombok:lombok'
 	testAnnotationProcessor 'org.projectlombok:lombok'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+
+	// aop 추가
+	implementation 'org.springframework.boot:spring-boot-starter-aop'
 }
 
 test {
