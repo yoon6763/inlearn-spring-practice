@@ -32,6 +32,14 @@
 <br>
 <br>
 
+### 스프링 DB 1편 - 데이터 접근 핵심 원리
+![image](https://github.com/user-attachments/assets/d2c7b16e-6819-41f2-b6ef-58edfb2707c2)
+
+* jdbc
+<br>
+<br>
+
+
 ### 스프링 핵심 원리 - 고급편
 ![image](https://github.com/yoon6763/inflearn-spring-practice/assets/74063259/1d23d756-a34c-4578-8b7f-21c5c7a7c394)
 
